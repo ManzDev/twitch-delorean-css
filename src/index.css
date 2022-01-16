@@ -1,0 +1,580 @@
+@font-face {
+  font-family: "Dosis";
+  src:
+    url("fonts/dosis.woff2") format("woff2"),
+    url("fonts/dosis.woff") format("woff"),
+    url("fonts/dosis.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Back to the Future 2002";
+  src:
+    url("fonts/bttf.woff2") format("woff2"),
+    url("fonts/bttf.woff") format("woff"),
+    url("fonts/bttf.ttf") format("truetype");
+}
+
+:root {
+  --border-size: 13px;
+  --border-color: #8f756b;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #335;
+}
+
+/*
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 6em;
+}
+*/
+
+.background {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  min-height: 325px;
+  padding-bottom: 50px;
+  box-sizing: border-box;
+  background-image:
+    linear-gradient(transparent 70%, #272636 70%, #16161d),
+    linear-gradient(to bottom, #352158, #884ced, #ec1cce, transparent 70%);
+  z-index: -5;
+  animation: back-move 3s linear infinite;
+
+  &>.title {
+    font-family: "Back to the Future 2002";
+    font-size: 6rem;
+    color: white;
+    margin-top: 0.25em;
+    background: linear-gradient(red, orange, gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter:
+      drop-shadow(4px 4px 0 #fff) drop-shadow(-4px -4px 0 #fff) drop-shadow(4px -4px 0 #fff) drop-shadow(-4px 4px 0 #fff) drop-shadow(2px 2px 4px #000);
+
+    & .small-container {
+      font-size: 3rem;
+    }
+
+    & .line {
+      display: flex;
+    }
+  }
+}
+
+.delorean {
+  --width: 550px;
+  --height: 340px;
+
+  width: var(--width);
+  min-width: var(--width);
+  height: var(--height);
+  position: relative;
+  animation: engine-move 0.1s infinite steps(5) alternate;
+
+  & .rearview {
+    background: #1d0b0c;
+    width: 55px;
+    height: 35px;
+    position: absolute;
+    border-radius: 0 0 0 25px;
+    top: 0;
+    transform: translate(25px, 58px);
+
+    &.right {
+      right: 0;
+      transform: translate(-25px, 58px) scaleX(-1);
+    }
+  }
+
+  & .delorean-top {
+    display: flex;
+    height: 155px;
+    position: relative;
+    z-index: 1;
+
+    & .left,
+    & .right {
+      width: 100%;
+      height: 100%;
+      background: black;
+      border: var(--border-size) solid var(--border-color);
+      border-bottom: 0;
+      border-radius: 10px 10px 0 0;
+      box-sizing: border-box;
+      transform: skewX(var(--sx)) translateX(var(--x));
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
+    }
+
+    & .left {
+      --sx: -40deg;
+      --x: 65px;
+
+      border-right: 0;
+      border-left-width: 25px;
+      clip-path: polygon(0 0, 70% 0, 100% 100%, 0 100%);
+    }
+
+    & .right {
+      --sx: 40deg;
+      --x: -65px;
+
+      border-left: 0;
+      border-right-width: 25px;
+      clip-path: polygon(50% 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    & .window {
+      width: 100%;
+      height: 64px;
+      border-bottom: 15px solid var(--border-color);
+    }
+
+    & .light-container {
+      padding-top: 15px;
+      transform: skewX(calc(var(--sx) * -1)) scaleX(1.25);
+
+      & .light {
+        width: 140px;
+        height: 43px;
+        background:
+          repeating-linear-gradient(#0007, transparent 2px 14px),
+          repeating-linear-gradient(90deg, #0007, transparent 2px 20px),
+          linear-gradient(90deg, #F3BE7D 20px, #F29E49 20px 60px, #E4712B 60px 100px, #C42B2E 100px 140px)
+      }
+    }
+
+    & .right {
+
+      & .light-container {
+        transform: skewX(calc(var(--sx) * -1)) scaleX(-1.25);
+      }
+    }
+
+    & .license {
+      --size: 100px;
+
+      width: var(--size);
+      font-family: "Dosis";
+      font-variation-settings: "wght"550;
+      line-height: 110%;
+      height: 39px;
+      background: #e6e3bb;
+      border: 2px solid #f79c1e;
+      border-radius: 5px;
+      position: absolute;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      left: calc(50% - calc(var(--size) / 2));
+      text-align: center;
+      font-weight: bold;
+
+      clip-path: polygon(0 0, 100% 0, 100% 40%, 95% 50%, 100% 60%, 100% 100%, 0 100%, 0% 60%, 5% 50%, 0 40%);
+
+      & .author {
+        font-size: 0.9rem;
+        color: #c02d28;
+      }
+
+      & .title {
+        font-size: 1rem;
+        color: #2a487d;
+      }
+    }
+  }
+
+  & .turbines-container {
+    width: 350px;
+    height: 75px;
+    position: absolute;
+    transform: translate(100px, 10px);
+    top: 0;
+    z-index: 5;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    & .turbine-container {
+      --x: 0px;
+      --y: 40px;
+
+      display: flex;
+      width: 120px;
+      height: 150px;
+      transform: translate(var(--x), var(--y));
+
+      &.right {
+        transform: scaleX(-1) translate(var(--x), var(--y));
+      }
+
+      & .turbine {
+        background: #8f756b;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        gap: 3px;
+        padding: 4px;
+        box-sizing: border-box;
+
+        &>div {
+          background: linear-gradient(to bottom, #000 65%, #433131 65%);
+        }
+      }
+
+      & .shape3d-container {
+        display: flex;
+        flex-direction: column;
+        width: 22px;
+        height: 100%;
+
+        & .triangle {
+          width: 100%;
+          height: 110px;
+          background: #433131;
+          clip-path: polygon(0 0, 100% 100%, 0 100%);
+        }
+
+        & .square {
+          width: 50%;
+          height: 44px;
+          background: #433131;
+        }
+
+      }
+
+    }
+
+    & .engine-container {
+      /* background: #ff000055; */
+      width: 135px;
+      height: 125px;
+      position: absolute;
+      transform: translateX(80%);
+      z-index: 10;
+
+      & .top {
+        width: 100%;
+        height: 75px;
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+
+        & .arc {
+          width: 90%;
+          height: 100%;
+          border: 11px solid #1d0b0c;
+          border-bottom: 0;
+          border-radius: 15px 15px 0 0;
+          box-sizing: border-box;
+
+          & .input-engine-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            height: 100%;
+
+            & .intake {
+              width: 35%;
+              height: 8px;
+              background: linear-gradient(to right, #d4c3b2 20%, #c0a392 20% 80%, #644d4c 80%);
+              transform: translateY(8px);
+            }
+
+            & .central {
+              width: 100px;
+              height: 22px;
+              background: conic-gradient(from 122deg at 50% -50%,
+                  transparent 0,
+                  #413130 2deg 5deg, #000 8deg,
+                  #413130 12deg, #000 15deg,
+                  #413130 18deg, #000 21deg,
+                  #BAABA5 26deg, #000 29deg,
+                  #BAABA5 34deg, #000 37deg,
+                  #BAABA5 42deg, #000 45deg,
+                  #BAABA5 50deg, #000 53deg,
+                  #BAABA5 58deg, #000 61deg,
+                  #BAABA5 66deg, #000 69deg,
+                  #BAABA5 74deg, #000 77deg,
+                  #BAABA5 82deg, #000 85deg,
+                  #BAABA5 90deg, #000 93deg,
+                  #BAABA5 98deg, #000 101deg,
+                  #BAABA5 106deg, #000 109deg,
+                  #BAABA5 114deg 115deg,
+                  transparent 116deg);
+              transform-origin: 50% 100%;
+              transform: scaleY(0.7);
+            }
+
+            & .base {
+              width: 100%;
+              height: 30px;
+              background: linear-gradient(to right, #8f756b 33%, #644d4c 33% 66%, #433131 66%);
+            }
+          }
+        }
+
+        & .antenna-container {
+          width: 32px;
+          height: 20px;
+          background: #8f756b;
+          border-radius: 5px 5px 0 0;
+          position: absolute;
+          top: 11px;
+
+          & .top {
+
+            width: 12px;
+            height: 22px;
+            background: #c0a392;
+            border-radius: 5px;
+            position: absolute;
+            top: -30px;
+            left: 10px;
+            display: flex;
+            align-items: flex-end;
+            padding-bottom: 4px;
+
+            & .dot {
+              width: 8px;
+              height: 8px;
+              border-radius: 5px;
+              background: #432f31;
+            }
+          }
+        }
+
+      }
+
+      & .bottom {
+        width: 100%;
+        height: 27px;
+        display: flex;
+        gap: 15px;
+
+        & .pipe {
+          width: 50%;
+          border: 14px solid #c0a392;
+
+          &::after {
+            content: "";
+            display: block;
+            width: 32px;
+            height: 15px;
+            background: #1d0b0c;
+            position: absolute;
+            transform: translateY(-15px);
+          }
+
+          &.left {
+            border-top-right-radius: 15px;
+            border-left: 0;
+            border-bottom: 0;
+          }
+
+          &.right {
+            border-top-left-radius: 15px;
+            border-right: 0;
+            border-bottom: 0;
+
+            &::after {
+              right: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  & .delorean-top-bottom {
+    height: 15px;
+    background: black;
+    border: calc(var(--border-size) * 1.9) solid var(--border-color);
+    border-top: 0;
+  }
+
+  & .delorean-middle {
+    display: flex;
+
+    & .left,
+    & .right {
+      display: grid;
+      grid-template-rows: 1.75fr 0.75fr 1fr;
+
+      height: 75px;
+
+      width: 100%;
+      height: 75px;
+      transform: skewX(var(--sx)) translateX(var(--x));
+    }
+
+    & .left {
+      --sx: 15deg;
+      --x: 10px;
+    }
+
+    & .right {
+      --sx: -15deg;
+      --x: -10px;
+    }
+
+    & .top {
+      background: #433131;
+    }
+
+    & .left .middle {
+      justify-content: flex-end;
+      padding-right: 30px;
+    }
+
+    & .right .middle {
+      justify-content: flex-start;
+      background: linear-gradient(to right, transparent 15px, #644d4c 15px);
+    }
+
+    & .middle {
+      background: #644d4c;
+      display: flex;
+      gap: 8px;
+
+      & .detail {
+        width: 32px;
+        height: 8px;
+        border-radius: 4px;
+        background: #1d0b0c;
+        transform: skewX(calc(var(--sx) * -1)) translate(16px, 4px);
+      }
+    }
+
+    & .bottom {
+      background: black;
+    }
+  }
+
+  & .delorean-bottom {
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+
+    & .wheel {
+      width: 80px;
+      height: 45px;
+      border-radius: 0 0 10px 10px;
+      background: #070506;
+
+      &.left {
+        transform: translate(40px);
+      }
+
+      &.right {
+        transform: translate(-40px);
+      }
+    }
+  }
+
+  & .delorean-pipelines {
+
+    & .pipelines {
+      width: 320px;
+      height: 125px;
+      border-radius: 0 21px 20px 0;
+      margin: 200px;
+      transform: skewx(-10deg);
+      box-shadow: 10px 10px #777;
+      position: absolute;
+      top: -60px;
+      left: 35px;
+
+      &.left {
+        transform: scaleX(-1) translateX(242px) skewx(-10deg);
+      }
+
+      &::before {
+        content: "";
+        width: 100%;
+        height: 155px;
+        border-radius: 0 20px 18px 0;
+        position: absolute;
+        transform: translate(-64px, -120px) skewx(45deg);
+        box-shadow: 10px -10px #777;
+      }
+    }
+
+    & .extra {
+      width: 300px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: absolute;
+      bottom: 53px;
+      left: 22.5%;
+
+      & .exhaust-pipe {
+        --size: 25px;
+
+        width: var(--size);
+        height: var(--size);
+        border-radius: 50%;
+        border: 4px solid #433131;
+        background: #000;
+      }
+
+      & .sign {
+        width: 200px;
+        height: 20px;
+        background: #433131;
+      }
+    }
+
+  }
+
+  & .delorean-shadow {
+    background: #1118;
+    width: 100%;
+    height: 50px;
+    border-radius: 50%;
+    transform: translateY(-35px);
+    position: absolute;
+    bottom: -35px;
+    animation: shadow-move 0.1s infinite steps(5) alternate;
+  }
+}
+
+@keyframes engine-move {
+  0% {
+    transform: translate(0px, -2px);
+  }
+
+  100% {
+    transform: translate(0px, 2px);
+  }
+}
+
+@keyframes shadow-move {
+  0% {
+    transform: translate(0px, -32px) scale(1.05);
+  }
+
+  100% {
+    transform: translate(0px, -30px) scale(1);
+  }
+}
